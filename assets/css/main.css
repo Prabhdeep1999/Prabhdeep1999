@@ -2568,6 +2568,8 @@ input, select, textarea {
 
 		.work-item p {
 			font-size: 1em;
+			text-align: justify;
+			text-justify: auto;
 			line-height: 1.5em;
 			margin: 0;
 		}
