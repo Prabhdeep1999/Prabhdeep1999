@@ -1,0 +1,505 @@
+
+<script src="http://www.google.com/jsapi" type="text/javascript"></script> 
+<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<!-- sets $$ as shorthand for in-text math functions -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+<style type="text/css">
+	body {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		font-weight:300;
+		font-size:18px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 1100px;
+	}
+	
+	h1 {
+		font-size:32px;
+		font-weight:300;
+	}
+	
+	.disclaimerbox {
+		background-color: #eee;		
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+		padding: 20px;
+	}
+
+	video.header-vid {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	img.header-img {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	img.rounded {
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	a:link,a:visited
+	{
+		color: #1367a7;
+		text-decoration: none;
+	}
+	a:hover {
+		color: #208799;
+	}
+	
+	td.dl-link {
+		height: 160px;
+		text-align: center;
+		font-size: 22px;
+	}
+	
+	.layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+		15px 15px 0 0px #fff, /* The fourth layer */
+		15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+		20px 20px 0 0px #fff, /* The fifth layer */
+		20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+		25px 25px 0 0px #fff, /* The fifth layer */
+		25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+	.paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35); /* The top layer shadow */
+
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+
+	.layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+		margin-top: 5px;
+		margin-left: 10px;
+		margin-right: 30px;
+		margin-bottom: 5px;
+	}
+	
+	.vert-cent {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	
+	hr
+	{
+		border: 0;
+		height: 1px;
+		background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+	}
+
+  figure 
+  {
+    display: inline-block;
+  }
+
+  figure figcaption 
+  {
+	margin-top: .5em;
+    border: 1px;
+    text-align: center;
+	font-weight: bold;
+  }
+
+  .column {
+            float: left;
+            height: auto;
+            padding: 5px;
+        }
+
+</style>
+
+<html>
+<head>
+	<title>GIF-Tune</title>
+	<meta property="og:image" content="Path to my teaser.png"/> <!-- Facebook automatically scrapes this. Go to https://developers.facebook.com/tools/debug/ if you update and want to force Facebook to rescrape. -->
+	<meta property="og:title" content="Creative and Descriptive Paper Title." />
+	<meta property="og:description" content="Paper description." />
+
+	<!-- Get from Google Analytics -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src=""></script> 
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-75863369-6');
+	</script>
+</head>
+
+<body>
+	<br>
+	<center>
+		<span style="font-size:36px">GIF-Tune: One-Shot Tuning for Continuous Text-to-GIF Synthesis</span>
+		<table align=center width=600px>
+            <br><br>
+			<table align=center width=600px>
+				<tr>
+					<td align=center width=100px>
+						<center>
+							<span style="font-size:24px"><a href="https://anishajain22.github.io/">Anisha Jain</a></span>
+						</center>
+					</td>
+          <td align=center width=100px>
+						<center>
+							<span style="font-size:24px"><a href="https://prabhdeep1999.github.io/Prabhdeep1999/">Prabhdeep Singh Sethi</a></span>
+						</center>
+					</td>
+					
+				</tr>
+			</table>
+		</table>
+	</center>
+	<!-- <center>
+        <br><br>
+		<table align=center width=850px>
+			<tr>
+				<td>
+					This is a final course project for <a href="https://learning-image-synthesis.github.io/sp24/">16-726 Learning Based Image Synthesis</a> in Spring 2024</a>.
+				</td>
+			</tr>
+		</table>
+	</center> -->
+
+	<hr>
+  <!-- TODO: add teaser gifs -->
+  <table align=center width=850px>
+    <tr>
+      <td>
+        <center>
+          <img class="round" style="width:400px" src="images/gif_tune/man_surfing.gif"/>
+          <figcaption>A man is surfing</figcaption>
+        </center>
+      </td>
+      <td>
+        <center>
+          <img class="round" style="width:400px" src="images/gif_tune/sloth_surfing.gif"/>
+          <figcaption>A <font color="red">sloth</font> is surfing</figcaption>
+        </center>
+    </tr>
+
+	<table align=center width=850px>
+		<center><h1>Abstract</h1></center>
+		<tr>
+			<td>
+        In an era where dynamic visual storytelling is increasingly sought after, our work "GIF-Tune: One-Shot Tuning for Continuous Text-to-GIF Synthesis" introduces an innovative process of text-guided GIFs. Conventional methods requires large video datasets, our approach is predicated on a one-shot tuning paradigm that requires only a single text-GIF pair for training, thereby removing the computational burdens associated with traditional text-to-video (T2V) frameworks. Our methodology can work with any text-to-image (T2I) diffusion architectures pre-trained on large image dataset. We introduce a spatiotemporal attention and background regularization techniques along with one-shot tuning strategy within our "GIF-Tune" model for temporally coherent and depth-consistent GIFs. For the inference process, we utilize discrete denoising implicit models (DDIM) for structural guidance, thus enhancing sampling efficiency. Our exhaustive experimental assessments, both qualitative and quantitative, underscore the proficiency of our methodology to adapt across a diverse array of applications, setting a new precedent for personalized, text-initiated GIF generation.
+			</td>
+		</tr>
+	</table>
+
+	<br>
+	<hr>
+	
+	<table align=center width=850px, cellpadding="10px"cellspacing="10px">
+		<center><h1>Related Works </h1></center>
+		<tr>
+		<td>
+		<img class="round" style="width:400px; height:205px" src="images/gif_tune/ldm.webp"/>
+		<figcaption>Latent Diffusion Model Overview</figcaption>
+		<p align="justify">
+        <b>Latent Diffusion Models</b> (LDMs), introduced by Rombach et al., represent a significant evolution within likelihood-based Denoising Probabilistic Models (DPMs), adept at capturing intricate data details for high-fidelity image generation. Traditionally, DPMs operated in pixel space, necessitating substantial computational resources and time, and suffering from slow, sequential inference processes. LDMs address these challenges by utilizing a two-phase training strategy: initially, an autoencoder compresses the image into a perceptually consistent latent representation, significantly reducing dimensionality. Subsequently, a DPM is trained on this compressed latent space instead of the high-dimensional pixel space, enhancing efficiency and allowing rapid generation from latent space back to detailed images. This method not only makes high-resolution image generation computationally feasible on limited setups but also speeds up the entire process, maintaining the quality and adaptability of the original DPM approach.
+		</p>
+		</td>
+
+      <td>
+		<img class="round" style="width:400px; height:150px" src="images/gif_tune/stable_diffusion_arch.png"/>
+		<figcaption>Stable Diffusion Overview</figcaption>
+        <p align="justify">
+		<b>Stable Diffusion</b>, introduced in 2022, marks a significant advancement in generative AI, enabling the creation of photorealistic images and animations from textual and visual prompts using diffusion processes and latent space rather than pixel space. This approach dramatically reduces the computational load, allowing efficient operation on standard desktop GPUs. It features a variational autoencoder (VAE) that compresses images without losing detail and quality, supported by expansive datasets from LAION. Stable Diffusion incorporates forward and reverse diffusion processes and a noise predictor, all facilitated by text conditioning. These components not only allow for detailed image generation but also extend to animating these images into GIFs, meeting the demands of personalized text-to-GIF synthesis with temporal cohesion and visual richness.
+		</p>
+      </td>
+		</tr>
+    <tr>
+      <td>
+		<img class="round" style="width:400px; height: 150px" src="images/gif_tune/make_a_video.png"/>
+		<figcaption>Make A Video Overview</figcaption>
+		<p align="justify">
+        <b>Make-a-Video</b> leverages the advancements in T2I generation for the creation of T2V content, using the appearance and language descriptors of the world from image-text pairs, while discerning motion from unlabelled video data. This method gives 3 major benefits: expediting T2V model training without necessitating the development of visual and multimodal foundations anew, eliminating the dependency on paired text-video datasets, and ensuring the generated videos reflect the extensive diversity encountered in modern image synthesis. Its architecture extends T2I models with spatial-temporal components, decomposing and approximating temporal U-Net and attention tensors across space and time, enabling it to produce videos of high resolution and frame rate. Make-A-Video's proficiency in adhering to textual prompts and delivering high-quality videos has established new benchmarks in the T2V domain.
+		</p>
+      </td>
+      <td>
+		<img class="round" style="width:400px; height: 180px" src="images/gif_tune/imagen_video.png"/>
+		<figcaption>Image Video Overview</figcaption>
+		<p align="justify">
+        <b>Imagen Video</b> introduces a text-conditional video generation system that leverages a cascade of video diffusion models to produce high-definition videos from textual prompts. This system employs a foundational video generation model alongside a series of spatial and temporal video super-resolution models that interleave to enhance video quality. The architecture incorporates fully-convolutional temporal and spatial super-resolution models at varying resolutions, utilizing v-parameterization for diffusion processes, thereby scaling the model effectively for high-definition outputs. By adapting techniques from diffusion-based image generation and employing progressive distillation with classifier-free guidance, Imagen Video achieves not high fidelity and rapid sampling rates while also providing a high degree of controllability and depth of world knowledge. This allows for the creation of stylistically diverse videos and text animations that demonstrate a sophisticated understanding of 3D objects. 
+		</p>
+      </td>
+    </tr>
+	</table>
+    <br><br>
+	<!-- <br>
+	<hr>
+	<br> -->
+
+	<table align=center width=850px>
+		<center><h1>Method</h1></center>
+		<tr>
+      <td>
+        <center>
+          <img class="round" style="width:600px" src="images/gif_tune/pipeline-train.png"/>
+          <figcaption>Fig 3 Pipeline: Training</figcaption>
+        </center>
+			</td>
+		</tr>
+    <tr>
+      <td>
+        <center>
+          <img class="round" style="width:600px" src="images/gif_tune/pipeline-inference.png"/>
+          <figcaption>Fig 4 Pipeline: Inference</figcaption>
+        </center>
+      </td>
+    </tr>
+	</table>
+
+  <table align=center width=850px>
+    <tr>
+      <td>
+        <br>
+        Our proposed method, GIF-Tune is a one-shot tuning strategy for continuous text-to-GIF synthesis. The model is trained on a single text-GIF pair and can generate GIFs from any text prompt. 
+        <br><br>
+        <b>Architecture</b> A T2I model is extended to spatial temporal domain by inflating 2D convolutional layers to psuedo 3D convolutional layers, by replacing the 2D kernels with 3D kernels and append a temporal self attention layer in each transformer block to model the temporal dependencies. We use causal self attention to model the temporal dependencies by computing the attention matrix between frame $z_i$ and two previous frames $z_{i-1}$ and $z_{1}$ i.e, the query feature is derived from $z_i$ and the key and value features are derived from $z_{i-1}$ and $z_{1}$. These attention layers are called spatiotemporal attention layers. We also add temporal self attention layers in the transformer blocks to model the temporal dependencies.
+        <br><br>
+        <b>Finetuning Pipeline</b> The model is now fine tuned on the input GIF and text prompt. In the spatiotemporal attention layers, we finetune the query matrix while keeping the key and value matrix fixed. In the cross attention layers in the transformers block, we fine tune the query matrix since the query feature vector are derived from the text prompt. The key and value matrices are kept frozen.
+        <br><br> 
+        <b>Inference Pipeline</b> During inference, the model generates GIFs from any text prompt. We obtain latent noise of input GIF using DDIM inversion. This allows the network to not produce stagnant GIFs. The latent noise is then fed into the GIF-Tune model along with the edited text prompt to generate the GIF. The model can generate GIFs with diverse and realistic 3D scenes across different categories. For the same input GIF, we only need to perform DDIM inversion once.
+        <br><br>
+        <b>Regularization</b> Along with the standard reconstruction loss, we introduce background regularization loss to ensure that the model does not ignore the background while generating the GIF. This is done using depth as a supervision signal. We also add temporal consistency loss to ensure that the generated GIF is temporally coherent by minimizing the difference between consecutive frames.
+      </td>
+    </tr>
+  </table>
+  <br><hr><br>
+
+	<table align=center width=850px>
+		<center><h1>Experimental Results</h1></center>
+		<tr>
+			<td>
+      Here're the results of our proposed method. On the left are the input GIF and text prompt. On the right are the generated GIFs for the novel edited text prompts.
+      <br><br>
+      <div align="middle">
+          <table style="width:100%">
+            <tr>
+              <td align="center">
+                <img src="images/gif_tune/watermelon.gif" width="350px" />
+                <br/>
+                <figcaption>A rabbit eating a watermelon</figcaption>
+              </td>
+              <td align="center">
+                <img src="images/gif_tune/watermelon_raccoon.gif" width="350px" />
+                <br/>
+                <figcaption>A <font color="red">raccoon</font> eating a watermelon</figcaption>
+              </td>
+              <td align="center">
+                <img src="images/gif_tune/watermelon_cat.gif" width="350px" />
+                <br/>
+                <figcaption>A <font color="red">cat wearing sunglasses</font> is eating a watermelon</figcaption>
+            </tr>
+          </table>
+          <hr>
+          <table style="width:100%">
+            <tr>
+              <td align="center">
+                <img src="images/gif_tune/guitar.gif" width="300px" />
+                <br/>
+                <figcaption>A pink haired girl playing guitar</figcaption>
+              </td>
+              <td align="center">
+                <img src="images/gif_tune/guitar_old_man.gif" width="300px" />
+                <br/>
+                <figcaption>An <font color="red">old man</font> playing guitar</figcaption>
+              </td>
+            </tr>
+          </table>
+          <hr>
+          <table style="width:100%">
+            <tr>
+              <td align="center">
+                <img src="images/gif_tune/run.gif" width="300px" />
+                <br/>
+                <figcaption>A man is running</figcaption>
+              </td>
+              <td align="center">
+                <img src="images/gif_tune/run_astronaut.gif" width="300px" />
+                <br/>
+                <figcaption>An <font color="red">astronaut</font> is running <font color="red">on Mars</font></figcaption>
+              </td>
+            </tr>
+          </table>
+					<hr>
+					<table style="width:100%">
+						<tr>
+							<td align="center">
+								<img src="images/gif_tune/dancing.gif" width="300px" />
+								<br/>
+								<figcaption>A man in a professional attire dancing in an office</figcaption>
+							</td>
+							<td align="center">
+								<img src="images/gif_tune/dancing_woman.gif" width="300px" />
+								<br/>
+								<figcaption>A <font color="red">woman</font> dancing in an office</figcaption>
+							</td>
+						</tr>
+      </div>	
+      <br><br>
+  </table>
+  <br><br>
+  
+  <table align=center width=850px>
+	<center><h1>Ablations</h1></center>
+	Following are the results of the same prompt but with different T2V models, the prompt used for all of the below results is: 
+	<br>
+	"Mother panda with her cubs"
+	<tr>
+		<td>
+			AnimateLCM
+		</td>
+		<td>
+			<img src="images/gif_tune/animate_lcm.gif" width="512px"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Text2Video-Zero/Stable-Diffusion_v1.4
+		</td>
+		<td>
+			<img src="images/gif_tune/compvis_sd_1_4.gif" width="512px"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Text2Video-Zero/Dreamlike-photoreal_v1
+		</td>
+		<td>
+			<img src="images/gif_tune/dreamlike_photoreal_1.gif" width="512px"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Text2Video-Zero/Dreamlike-photoreal_v2
+		</td>
+		<td>
+			<img src="images/gif_tune/dreamlike_photoreal_2.gif" width="512px"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Text2Video-Zero/Fast-Dreambooth
+		</td>
+		<td>
+			<img src="images/gif_tune/fast_dreambooth.gif" width="512px"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Text2Video-Zero/Promthero-Openjourney
+		</td>
+		<td>
+			<img src="images/gif_tune/prompthero_openjourney.gif" width="512px"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Text2Video-Zero/Runway-Stable-Diffusion
+		</td>
+		<td>
+			<img src="images/gif_tune/runway_stable_diffusion_1_5.gif" width="512px"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Stable Video Diffusion (This is an image to video model)
+		</td>
+		<td>
+			<img src="images/gif_tune/stable_vid_diff_img2vid.gif" width="512px"/>
+		</td>
+	</tr>
+  </table>
+
+  <table align=center width=850px>
+		<center><h1>References</h1></center>
+		<tr>
+			<td>
+				Rombach, Robin, et al. "High-resolution image synthesis with latent diffusion models." Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 2022.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Singer, Uriel, et al. "Make-a-video: Text-to-video generation without text-video data." arXiv preprint arXiv:2209.14792 (2022).
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Ho, Jonathan, et al. "Imagen video: High definition video generation with diffusion models." arXiv preprint arXiv:2210.02303 (2022).
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Wu, Jay Zhangjie, et al. "Tune-a-video: One-shot tuning of image diffusion models for text-to-video generation." Proceedings of the IEEE/CVF International Conference on Computer Vision. 2023.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Wang, Fu-Yun, et al. "AnimateLCM: Accelerating the Animation of Personalized Diffusion Models and Adapters with Decoupled Consistency Learning." arXiv preprint arXiv:2402.00769 (2024).
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Khachatryan, Levon, et al. "Text2video-zero: Text-to-image diffusion models are zero-shot video generators." Proceedings of the IEEE/CVF International Conference on Computer Vision. 2023.
+			</td>
+		</tr>
+	</table>
+
+
+
+	<table align=center width=900px style="margin-top:2em">
+		<tr>
+			<td width=400px>
+				<left>
+					This template was originally made by <a href="http://web.mit.edu/phillipi/">Phillip Isola</a> and <a href="http://richzhang.github.io/">Richard Zhang</a> for a <a href="http://richzhang.github.io/colorization/">colorful</a> ECCV project; the code can be found <a href="https://github.com/richzhang/webpage-template">here</a>.
+				</left>
+			</td>
+		</tr>
+	</table>
+
+<br>
+</body>
+</html>
+
